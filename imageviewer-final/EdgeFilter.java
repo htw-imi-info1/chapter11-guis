@@ -55,7 +55,7 @@ public class EdgeFilter extends Filter
      */
     private Color edge(int xpos, int ypos)
     {
-        List<Color> pixels = new ArrayList<Color>(9);
+        List<Color> pixels = new ArrayList<>(9);
         
         for(int y = ypos-1; y <= ypos+1; y++) {
             for(int x = xpos-1; x <= xpos+1; x++) {

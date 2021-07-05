@@ -20,12 +20,11 @@ import java.io.*;
  * @version 1.0
  */
 public class MusicPlayerGUI extends JFrame
-    implements ChangeListener, ActionListener
 {
     private static final String VERSION = "Version 1.0";
-    private static final String AUDIO_DIR = "audio";
+    private static final String AUDIO_DIR = "../audio";
     
-    private JList fileList;
+    private JList<String> fileList;
     private JSlider slider;
     private JLabel infoLabel;
     private MusicOrganizer organizer;
@@ -121,36 +120,6 @@ public class MusicPlayerGUI extends JFrame
                     JOptionPane.INFORMATION_MESSAGE);
     }
     
-    // ------- ChangeListener interface (for Slider) -------
-
-    /**
-     * ChangeListener method for slider changes. This method is called
-     * when the slider value is changed by the user.
-     * @param evt The event details.
-     */
-    public void stateChanged(ChangeEvent evt)
-    {
-        // Seek to a new position in the current file.
-        // The slider's value range is a percentage.
-    }
-    
-    // ------- ActionListener interface (for ComboBox) -------
-
-    /**
-     * ActionListener method for changes of format combo box.
-     * When this method is called, the user has made a new selection 
-     * in the combo box.
-     * @param evt The event details.
-     */
-    public void actionPerformed(ActionEvent evt) 
-    {
-        JComboBox cb = (JComboBox)evt.getSource();
-        String ordering = (String) cb.getSelectedItem();
-        if(ordering != null) {
-            setListOrdering(ordering);
-        }
-    }
-    
     /**
      * Set the ordering of the track list.
      * @param ordering The ordering to use.
@@ -216,14 +185,20 @@ public class MusicPlayerGUI extends JFrame
             String[] ordering = Track.FIELDS;
             
             // Create the combo box.
-            JComboBox formatList = new JComboBox(ordering);
-            formatList.addActionListener(this);
+            JComboBox<String> formatList = new JComboBox<>(ordering);
+            formatList.addActionListener(e -> {
+                int index = formatList.getSelectedIndex();
+                if(index >= 0) {
+                    String selectedOrder = formatList.getItemAt(index);
+                    setListOrdering(selectedOrder);
+                }
+            });
             orderingPanel.add(formatList, BorderLayout.CENTER);
             
             leftPane.add(orderingPanel, BorderLayout.NORTH);
     
             // Create the scrolled list for track listing.
-            fileList = new JList();
+            fileList = new JList<>();
             fileList.setForeground(new Color(140,171,226));
             fileList.setBackground(new Color(0,0,0));
             fileList.setSelectionBackground(new Color(87,49,134));
@@ -255,7 +230,9 @@ public class MusicPlayerGUI extends JFrame
             TitledBorder border = new TitledBorder("Seek");
             border.setTitleColor(Color.white);
             slider.setBorder(new CompoundBorder(new EmptyBorder(6, 10, 10, 10), border));
-            slider.addChangeListener(this);
+            // Provide a body for the change-listener lambda to react to changes
+            // of the slider.
+            slider.addChangeListener(e -> { });
             slider.setBackground(Color.BLACK);
             slider.setMajorTickSpacing(25);
             slider.setPaintTicks(true);
@@ -269,35 +246,19 @@ public class MusicPlayerGUI extends JFrame
             toolbar.setLayout(new GridLayout(1, 0));
   
             JButton button = new JButton("Play");
-            button.addActionListener(new ActionListener() {
-                       public void actionPerformed(ActionEvent e) {
-                           play();
-                       }
-                   });
+            button.addActionListener(e -> play());
             toolbar.add(button);
             
             button = new JButton("Stop");
-            button.addActionListener(new ActionListener() {
-                       public void actionPerformed(ActionEvent e) { 
-                           stop(); 
-                       }
-                   });
+            button.addActionListener(e -> stop());
             toolbar.add(button);
     
             button = new JButton("Pause");
-            button.addActionListener(new ActionListener() {
-                       public void actionPerformed(ActionEvent e) { 
-                           pause(); 
-                       }
-                   });
+            button.addActionListener(e -> pause());
             toolbar.add(button);
             
             button = new JButton("Resume");
-            button.addActionListener(new ActionListener() {
-                       public void actionPerformed(ActionEvent e) { 
-                           resume(); 
-                       }
-                   });
+            button.addActionListener(e -> resume());
             toolbar.add(button);
 
         }
@@ -333,23 +294,15 @@ public class MusicPlayerGUI extends JFrame
         
         item = new JMenuItem("Quit");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                   public void actionPerformed(ActionEvent e) { 
-                       quit(); 
-                   }
-               });
+            item.addActionListener(e -> quit());
         menu.add(item);
 
         // create the Help menu
         menu = new JMenu("Help");
         menubar.add(menu);
         
-        item = new JMenuItem("About SoundPlayer...");
-            item.addActionListener(new ActionListener() {
-                   public void actionPerformed(ActionEvent e) { 
-                       showAbout(); 
-                   }
-               });
+        item = new JMenuItem("About Music Player...");
+            item.addActionListener(e -> showAbout());
         menu.add(item);
     }
 }

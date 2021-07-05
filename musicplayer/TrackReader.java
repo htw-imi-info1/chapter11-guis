@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * and track name, separated by a dash. For example: TheBeatles-HereComesTheSun.mp3
  * 
  * @author David J. Barnes and Michael Kölling
- * @version 2011.03.27
+ * @version 2016.02.29
  */
 public class TrackReader
 {
@@ -33,7 +33,7 @@ public class TrackReader
     public ArrayList<Track> readTracks(String folder, final String suffix)
     {
         File audioFolder = new File(folder);
-        ArrayList<Track> tracks = new ArrayList<Track>();
+        ArrayList<Track> tracks = new ArrayList<>();
         File[] audioFiles = audioFolder.listFiles(new FilenameFilter() {
             /**
              * Accept files with matching suffix.

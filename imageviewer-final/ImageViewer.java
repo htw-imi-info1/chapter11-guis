@@ -243,7 +243,7 @@ public class ImageViewer
      */
     private List<Filter> createFilters()
     {
-        List<Filter> filterList = new ArrayList<Filter>();
+        List<Filter> filterList = new ArrayList<>();
         filterList.add(new DarkerFilter("Darker"));
         filterList.add(new LighterFilter("Lighter"));
         filterList.add(new ThresholdFilter("Threshold"));
@@ -292,15 +292,11 @@ public class ImageViewer
         toolbar.setLayout(new GridLayout(0, 1));
         
         smallerButton = new JButton("Smaller");
-        smallerButton.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { makeSmaller(); }
-                           });
+        smallerButton.addActionListener(e -> makeSmaller());
         toolbar.add(smallerButton);
         
         largerButton = new JButton("Larger");
-        largerButton.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { makeLarger(); }
-                           });
+        largerButton.addActionListener(e -> makeLarger());
         toolbar.add(largerButton);
 
         // Add toolbar into panel with flow layout for spacing
@@ -342,32 +338,24 @@ public class ImageViewer
         
         item = new JMenuItem("Open...");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { openFile(); }
-                           });
+            item.addActionListener(e -> openFile());
         menu.add(item);
 
         item = new JMenuItem("Close");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { close(); }
-                           });
+            item.addActionListener(e -> close());
         menu.add(item);
         menu.addSeparator();
 
         item = new JMenuItem("Save As...");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { saveAs(); }
-                           });
+            item.addActionListener(e -> saveAs());
         menu.add(item);
         menu.addSeparator();
         
         item = new JMenuItem("Quit");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { quit(); }
-                           });
+            item.addActionListener(e -> quit());
         menu.add(item);
 
 
@@ -375,13 +363,9 @@ public class ImageViewer
         menu = new JMenu("Filter");
         menubar.add(menu);
         
-        for(final Filter filter : filters) {
+        for(Filter filter : filters) {
             item = new JMenuItem(filter.getName());
-            item.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) { 
-                                    applyFilter(filter);
-                                }
-                           });
+            item.addActionListener(e -> applyFilter(filter));
              menu.add(item);
          }
 
@@ -390,9 +374,7 @@ public class ImageViewer
         menubar.add(menu);
         
         item = new JMenuItem("About ImageViewer...");
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { showAbout(); }
-                           });
+            item.addActionListener(e -> showAbout());
         menu.add(item);
 
     }

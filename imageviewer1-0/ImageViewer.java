@@ -131,7 +131,7 @@ public class ImageViewer
     }
     
     /**
-     * 'Lighter' function: make the picture lighter
+     * Show the 'About...' dialog.
      */
     private void showAbout()
     {
@@ -222,24 +222,18 @@ public class ImageViewer
         
         item = new JMenuItem("Open");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { openFile(); }
-                           });
+            item.addActionListener(e -> openFile());
         menu.add(item);
 
         item = new JMenuItem("Close");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { close(); }
-                           });
+            item.addActionListener(e -> close());
         menu.add(item);
         menu.addSeparator();
         
         item = new JMenuItem("Quit");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { quit(); }
-                           });
+            item.addActionListener(e -> quit());
         menu.add(item);
 
 
@@ -248,31 +242,24 @@ public class ImageViewer
         menubar.add(menu);
         
         item = new JMenuItem("Darker");
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { makeDarker(); }
-                           });
+            item.addActionListener(e -> makeDarker());
         menu.add(item);
 
         item = new JMenuItem("Lighter");
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { makeLighter(); }
-                           });
+            item.addActionListener(e -> makeLighter());
         menu.add(item);
 
         item = new JMenuItem("Threshold");
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { threshold(); }
-                           });
+            item.addActionListener(e -> threshold());
         menu.add(item);
 
+        
         // create the Help menu
         menu = new JMenu("Help");
         menubar.add(menu);
         
         item = new JMenuItem("About ImageViewer...");
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { showAbout(); }
-                           });
+            item.addActionListener(e -> showAbout());
         menu.add(item);
 
     }

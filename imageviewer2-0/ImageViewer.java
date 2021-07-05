@@ -108,7 +108,7 @@ public class ImageViewer
     }
     
     /**
-     * 'Lighter' function: make the picture lighter
+     * Show the 'About...' dialog.
      */
     private void showAbout()
     {
@@ -149,7 +149,7 @@ public class ImageViewer
      */
     private List<Filter> createFilters()
     {
-        List<Filter> filterList = new ArrayList<Filter>();
+        List<Filter> filterList = new ArrayList<>();
         filterList.add(new DarkerFilter("Darker"));
         filterList.add(new LighterFilter("Lighter"));
         filterList.add(new ThresholdFilter("Threshold"));
@@ -197,9 +197,7 @@ public class ImageViewer
      */
     private void makeMenuBar(JFrame frame)
     {
-        final int SHORTCUT_MASK =
-            Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-
+        final int SHORTCUT_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 
         JMenuBar menubar = new JMenuBar();
         frame.setJMenuBar(menubar);
@@ -213,24 +211,18 @@ public class ImageViewer
         
         item = new JMenuItem("Open");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { openFile(); }
-                           });
+            item.addActionListener(e -> openFile());
         menu.add(item);
 
         item = new JMenuItem("Close");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { close(); }
-                           });
+            item.addActionListener(e -> close());
         menu.add(item);
         menu.addSeparator();
         
         item = new JMenuItem("Quit");
             item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { quit(); }
-                           });
+            item.addActionListener(e -> quit());
         menu.add(item);
 
 
@@ -238,24 +230,18 @@ public class ImageViewer
         menu = new JMenu("Filter");
         menubar.add(menu);
         
-        for(final Filter filter : filters) {
+        for(Filter filter : filters) {
             item = new JMenuItem(filter.getName());
-            item.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) { 
-                                    applyFilter(filter);
-                                }
-                           });
-             menu.add(item);
-         }
+            item.addActionListener(e -> applyFilter(filter));
+            menu.add(item);
+        }
 
         // create the Help menu
         menu = new JMenu("Help");
         menubar.add(menu);
         
         item = new JMenuItem("About ImageViewer...");
-            item.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { showAbout(); }
-                           });
+            item.addActionListener(e -> showAbout());
         menu.add(item);
 
     }

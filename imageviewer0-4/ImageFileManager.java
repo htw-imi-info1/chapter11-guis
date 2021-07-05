@@ -47,7 +47,7 @@ public class ImageFileManager
      * returns null.
      * 
      * @param imageFile  The image file to be loaded.
-     * @return           The image object or null is it was not a valid image file.
+     * @return           The image object or null if it was not a valid image file.
      */
     public static OFImage loadImage(File imageFile)
     {

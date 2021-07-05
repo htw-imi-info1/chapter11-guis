@@ -8,7 +8,7 @@ import java.util.List;
  * Individual tracks may be played.
  * 
  * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @version 2016.02.29
  */
 public class MusicOrganizer
 {
@@ -23,7 +23,7 @@ public class MusicOrganizer
      */
     public MusicOrganizer(String folderName)
     {
-        tracks = new ArrayList<Track>();
+        tracks = new ArrayList<>();
         reader = new TrackReader();
         readLibrary(folderName);
     }
@@ -76,7 +76,7 @@ public class MusicOrganizer
      */
     public List<Track> getAllTracks()
     {
-        return new ArrayList<Track>(tracks);
+        return new ArrayList<>(tracks);
     }
     
     /**

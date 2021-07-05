@@ -21,7 +21,6 @@ public class ImageViewer extends JFrame
     {
         super("ImageViewer");
         makeFrame();
-        setVisible(true);
     }
     
     // ---- swing stuff to build the frame and all its components ----
@@ -37,5 +36,6 @@ public class ImageViewer extends JFrame
         contentPane.add(label);
 
         pack();
+        setVisible(true);
     }
 }

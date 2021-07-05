@@ -58,7 +58,7 @@ public class ImageViewer
         JLabel label = new JLabel("I am a label. I can display some text.");
         contentPane.add(label);
 
-        // building is done - arrange the components and show        
+        // building is done - arrange the components and show
         frame.pack();
         frame.setVisible(true);
     }
@@ -77,15 +77,11 @@ public class ImageViewer
         menubar.add(fileMenu);
         
         JMenuItem openItem = new JMenuItem("Open");
-            openItem.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { openFile(); }
-                           });
+        openItem.addActionListener(e -> openFile());
         fileMenu.add(openItem);
 
         JMenuItem quitItem = new JMenuItem("Quit");
-            quitItem.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { quit(); }
-                           });
+        quitItem.addActionListener(e -> quit());
         fileMenu.add(quitItem);
     }
 }

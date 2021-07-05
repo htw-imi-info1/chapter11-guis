@@ -40,7 +40,7 @@ import javazoom.jl.player.FactoryRegistry;
  * These modifications permit arbitrary seek operations.
  * 
  * Modifications by David J. Barnes and Michael Kölling.
- * @version 2011.07.31
+ * @version 2016.02.29
  * This class is not suitable for playing streams as a file is read
  * completely before playing.
  */

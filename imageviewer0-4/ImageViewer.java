@@ -84,16 +84,12 @@ public class ImageViewer
         
         JMenuItem openItem = new JMenuItem("Open");
             openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, SHORTCUT_MASK));
-            openItem.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { openFile(); }
-                           });
+            openItem.addActionListener(e -> openFile());
         fileMenu.add(openItem);
 
         JMenuItem quitItem = new JMenuItem("Quit");
             quitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
-            quitItem.addActionListener(new ActionListener() {
-                               public void actionPerformed(ActionEvent e) { quit(); }
-                           });
+            quitItem.addActionListener(e -> quit());
         fileMenu.add(quitItem);
 
     }

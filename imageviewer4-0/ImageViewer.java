@@ -17,12 +17,12 @@ import java.util.Iterator;
  * To start the application, create an object of this class.
  * 
  * @author Michael Kölling and David J. Barnes.
- * @version 3.0
+ * @version 4.0
  */
 public class ImageViewer
 {
     // static fields:
-    private static final String VERSION = "Version 3.0";
+    private static final String VERSION = "Version 4.0";
     private static JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
 
     // fields:
@@ -33,6 +33,8 @@ public class ImageViewer
     private JButton smallerButton;
     private JButton largerButton;
     private OFImage currentImage;
+    // Current editing color.
+    private Color currentColor;
     
     private List<Filter> filters;
     
@@ -42,6 +44,7 @@ public class ImageViewer
     public ImageViewer()
     {
         currentImage = null;
+        currentColor = null;
         filters = createFilters();
         makeFrame();
     }
@@ -248,6 +251,52 @@ public class ImageViewer
         return filterList;
     }
     
+    /**
+     * Handle mouse button pressed on the image.
+     * @param e The mouse event object, providing details of the mouse press event.
+     */
+    private void handleMousePressed(MouseEvent e) 
+    {
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            if((e.getModifiers() & MouseEvent.SHIFT_MASK) == MouseEvent.SHIFT_MASK) {
+                chooseColor();
+            }
+            else {
+                editImage(e);
+            }
+        }
+    }
+    
+    /**
+     * Choose a color for editing the picture.
+     */
+    private void chooseColor()
+    {
+        Color chosen = JColorChooser.showDialog(imagePanel, "Choose color", currentColor);
+        if(chosen != null) {
+            currentColor = chosen;
+        }
+    }
+    
+    /**
+     * Edit the image using the given mouse event to determine
+     * the location of the edit.
+     * @param event The mouse event triggering the edit.
+     */
+    private void editImage(MouseEvent event)
+    {
+        if(currentImage != null && currentColor != null) {
+            // Replace pixel at the current position with the currentColor.
+            int x = event.getX();
+            int y = event.getY();
+            currentImage.setPixel(x, y, currentColor);
+            imagePanel.repaint();
+        }
+        else {
+            // No image to edit.
+        }
+    }
+
     // ---- swing stuff to build the frame and all its components ----
     
     /**
@@ -267,6 +316,9 @@ public class ImageViewer
         // Create the image pane in the center
         imagePanel = new ImagePanel();
         imagePanel.setBorder(new EtchedBorder());
+        imagePanel.addMouseListener(new MouseAdapter() {
+                         public void mousePressed(MouseEvent e) { handleMousePressed(e); }
+                     });
         contentPane.add(imagePanel, BorderLayout.CENTER);
         
         // Create two labels at top and bottom for the file name and status message
@@ -353,8 +405,8 @@ public class ImageViewer
         
         for(Filter filter : filters) {
             item = new JMenuItem(filter.getName());
-            item.addActionListener(e -> applyFilter(filter));
-             menu.add(item);
+                item.addActionListener(e -> applyFilter(filter));
+            menu.add(item);
          }
 
         // create the Help menu
