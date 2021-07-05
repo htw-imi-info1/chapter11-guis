@@ -4,14 +4,14 @@ Authors: David Barnes and Michael Kölling
 This project is part of the material for the book
 
    Objects First with Java - A Practical Introduction using BlueJ
-   Fifth edition
+   Sixth edition
    David J. Barnes and Michael Kölling
-   Pearson Education, 2012
+   Pearson Education, 2016
 
-It is discussed in chapter 11.
+It is discussed in chapter 13.
 
 To use this project, create an instance of class ImageViewer.
-This version is the first complted version of this project. It is not 
-perfect, but at least it can display some inages!
+This version is the first completed version of this project. It is not 
+perfect, but at least it can display some images.
 
 For details, refer to the book chapter.

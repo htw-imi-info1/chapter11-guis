@@ -2,7 +2,7 @@ PROJECT TITLE: layouts
 
 PURPOSE OF PROJECT: To provide an illustrate of layout options.
 
-VERSION or DATE: 2012.07.31
+VERSION or DATE: 2016.02.29
 
 AUTHORS: David J. Barnes and Michael Kölling
 
